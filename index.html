@@ -1,0 +1,521 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Anniversary, Rishita!</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- 1. Aesthetic Design & Variables --- */
+        :root {
+            --primary-pink: #ffdde1;
+            --deep-red: #d32f2f;
+            --soft-white: #ffffff;
+            --text-color: #4a4a4a;
+            --accent-pink: #ee9ca7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff0f3;
+            color: var(--text-color);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- Animations --- */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transition: all 1s ease-out;
+            transform: translateY(30px);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- 2. Header Section --- */
+        header {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            color: white;
+        }
+
+        header h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 5rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            animation: fadeIn 2s ease-in;
+        }
+
+        header .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            font-size: 2rem;
+            animation: float 2s infinite ease-in-out;
+            color: white;
+        }
+
+        /* --- 5. Personalized Message --- */
+        .message-section {
+            padding: 80px 20px;
+            background: var(--soft-white);
+            text-align: center;
+        }
+
+        .message-card {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            border: 2px solid var(--primary-pink);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .message-card::before {
+            content: '❤';
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            color: var(--deep-red);
+            background: var(--soft-white);
+            padding: 0 10px;
+        }
+
+        .message-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: var(--deep-red);
+        }
+
+        /* --- 3. Interactive Photo Gallery --- */
+        .gallery-section {
+            padding: 80px 20px;
+            background-color: var(--primary-pink);
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: var(--deep-red);
+            margin-bottom: 50px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            height: 300px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Lightbox Modal */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border: 5px solid white;
+            border-radius: 5px;
+        }
+
+        .lightbox .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 3rem;
+            cursor: pointer;
+        }
+
+        /* --- 4. Lovely Quotes Section --- */
+        .quotes-section {
+            padding: 80px 20px;
+            background: white;
+            text-align: center;
+        }
+
+        .carousel-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quote-slide {
+            display: none;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--text-color);
+        }
+
+        .quote-slide.active {
+            display: block;
+            animation: fadeIn 1s;
+        }
+
+        .quote-slide i {
+            color: var(--deep-red);
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        /* --- 6. Interactive Message Wall --- */
+        .wall-section {
+            padding: 80px 20px;
+            background: #fff0f3;
+        }
+
+        .wall-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .wall-form {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        button.submit-btn {
+            background: var(--deep-red);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        button.submit-btn:hover {
+            background: #b71c1c;
+        }
+
+        .messages-display {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .note {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid var(--accent-pink);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .note h4 {
+            color: var(--deep-red);
+            margin-bottom: 5px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.4rem;
+        }
+
+        /* --- 8. Footer Section --- */
+        footer {
+            background: var(--deep-red);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 15px;
+            transition: transform 0.3s;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+        }
+
+        .music-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--primary-pink);
+            text-decoration: none;
+            border: 1px solid var(--primary-pink);
+            padding: 8px 20px;
+            border-radius: 20px;
+        }
+
+        .music-link:hover {
+            background: var(--primary-pink);
+            color: var(--deep-red);
+        }
+
+        /* --- 7. Mobile Responsiveness --- */
+        @media (max-width: 768px) {
+            header h1 { font-size: 3.5rem; }
+            .section-title { font-size: 2.5rem; }
+            .message-text { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div>
+            <h1>Happy Anniversary, Rishita!</h1>
+            <p style="font-size: 1.2rem; margin-top: 10px;">To many more years of love and laughter</p>
+        </div>
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </header>
+
+    <!-- Personalized Message -->
+    <section class="message-section reveal" id="message">
+        <div class="message-card">
+            <p class="message-text">
+                "My Dearest Rishita, <br><br>
+                Every day spent with you is my new favorite day. Thank you for being my rock, my joy, and my best friend. As we celebrate another year together, I look back at all our memories with a smile and look forward to our future with excitement. <br><br>
+                I love you more than words can say."
+            </p>
+            <p style="text-align: right; margin-top: 20px; font-weight: bold;">- Yours Forever</p>
+        </div>
+    </section>
+
+    <!-- Photo Gallery -->
+    <section class="gallery-section reveal" id="gallery">
+        <h2 class="section-title">Our Moments</h2>
+        <div class="gallery-grid">
+            <!-- Replace src with your images -->
+            <div class="gallery-item"><img src="C:\Users\rajan\Downloads\Screenshot_20251226-153011.WhatsApp.png" alt="Together 1"></div>
+            <div class="gallery-item"><img src="C:\Users\rajan\Downloads\Screenshot_20251226-153022.WhatsApp.png" alt="Together 2"></div>
+            <div class="gallery-item"><img src="C:\Users\rajan\Downloads\Screenshot_20251226-153031.WhatsApp.png" alt="Together 3"></div>
+            <div class="gallery-item"><img src="C:\Users\rajan\Downloads\Screenshot_20251226-153040.WhatsApp.png" alt="Together 4"></div>
+            <div class="gallery-item"><img src="C:\Users\rajan\Downloads\Screenshot_20251226-153047.WhatsApp.png" alt="Together 5"></div>
+            <div class="gallery-item"><img src="C:\Users\rajan\Downloads\Screenshot_20251226-154135.WhatsApp.png" alt="Together 6"></div>
+        </div>
+    </section>
+
+    <!-- Lovely Quotes Carousel -->
+    <section class="quotes-section reveal" id="quotes">
+        <h2 class="section-title">Words of Love</h2>
+        <div class="carousel-container">
+            <div class="quote-slide active">
+                <i class="fas fa-heart"></i>
+                <p>"In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine."</p>
+                <small>- Maya Angelou</small>
+            </div>
+            <div class="quote-slide">
+                <i class="fas fa-heart"></i>
+                <p>"I saw that you were perfect, and so I loved you. Then I saw that you were not perfect and I loved you even more."</p>
+                <small>- Angelita Lim</small>
+            </div>
+            <div class="quote-slide">
+                <i class="fas fa-heart"></i>
+                <p>"Grow old with me, the best is yet to be."</p>
+                <small>- Robert Browning</small>
+            </div>
+        </div>
+    </section>
+
+    <!-- Message Wall -->
+    <section class="wall-section reveal" id="wall">
+        <h2 class="section-title">Message Wall</h2>
+        <div class="wall-container">
+            <div class="wall-form">
+                <h3>Leave a Note</h3>
+                <form id="messageForm">
+                    <div class="form-group">
+                        <input type="text" id="senderName" placeholder="Your Name / Nickname" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="messageText" rows="3" placeholder="Write a memory or wish..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Post Love <i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+            <div class="messages-display" id="messageBoard">
+                <!-- Messages will appear here -->
+                <div class="note">
+                    <h4>From: The Future</h4>
+                    <p>Here's to a hundred more anniversaries together! ❤</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-icons">
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        </div>
+        <br>
+        <a href="https://open.spotify.com/playlist/49SJwUljj3VLhyN8ohK7W0?si=c0a5b60cf4454239" target="_blank" class="music-link"><i class="fas fa-music"></i> Our Playlist</a>
+        <p style="margin-top: 20px; font-size: 0.8rem;">Made with ❤ for Rishita</p>
+    </footer>
+
+    <!-- Lightbox Element -->
+    <div class="lightbox" id="lightbox">
+        <span class="close-btn">&times;</span>
+        <img id="lightbox-img" src="" alt="Full Screen">
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // --- Scroll Animations (Intersection Observer) ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // --- Quotes Carousel ---
+        let currentQuote = 0;
+        const quotes = document.querySelectorAll('.quote-slide');
+        
+        function showNextQuote() {
+            quotes[currentQuote].classList.remove('active');
+            currentQuote = (currentQuote + 1) % quotes.length;
+            quotes[currentQuote].classList.add('active');
+        }
+
+        setInterval(showNextQuote, 5000); // Change quote every 5 seconds
+
+        // --- Lightbox Functionality ---
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeBtn = document.querySelector('.close-btn');
+        const galleryImages = document.querySelectorAll('.gallery-item img');
+
+        galleryImages.forEach(img => {
+            img.addEventListener('click', () => {
+                lightbox.style.display = 'flex';
+                lightboxImg.src = img.src;
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if(e.target !== lightboxImg) {
+                lightbox.style.display = 'none';
+            }
+        });
+
+        // --- Message Wall Functionality ---
+        const messageForm = document.getElementById('messageForm');
+        const messageBoard = document.getElementById('messageBoard');
+
+        messageForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('senderName').value;
+            const text = document.getElementById('messageText').value;
+
+            if(name && text) {
+                const note = document.createElement('div');
+                note.classList.add('note');
+                
+                note.innerHTML = `
+                    <h4>From: ${name}</h4>
+                    <p>${text}</p>
+                `;
+
+                messageBoard.prepend(note); // Add new note to the top
+                messageForm.reset();
+            }
+        });
+    </script>
+</body>
+</html>
+```
